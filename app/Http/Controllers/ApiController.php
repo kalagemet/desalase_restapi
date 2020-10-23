@@ -77,7 +77,7 @@ class ApiController extends Controller
                     'deskripsi'=> $detail->desk,
                     'image' => $image,
                     'produsen'=>$detail->produsen,
-                    'harga'=>$detail->harga,
+                    'harga'=>number_format($detail->harga,0,'.',','),
                     'link'=>explode('|',$detail->url),
                     'tags'=>explode('|',$detail->tags),
                     'breadcrumb'=>[
