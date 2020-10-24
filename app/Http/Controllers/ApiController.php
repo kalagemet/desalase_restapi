@@ -44,7 +44,7 @@ class ApiController extends Controller
     public function getProduk(Request $request)
     {
         $base = url('');
-        $data = Detail::select(DB::raw("id,nama,produsen,harga,CONCAT('$base',SUBSTRING_INDEX(img,'|',1)) as img"))->orderby('order','DESC')
+        $data = Detail::select(DB::raw("id,nama,produsen,format(harga,0),CONCAT('$base',SUBSTRING_INDEX(img,'|',1)) as img"))->orderby('order','DESC')
             ->simplePaginate((int) $request->get('limit',10));
         return response()->json($data)->withCallback($request->callback); 
     }
@@ -78,6 +78,7 @@ class ApiController extends Controller
                     'image' => $image,
                     'produsen'=>$detail->produsen,
                     'harga'=>number_format($detail->harga,0,'.',','),
+                    
                     'link'=>explode('|',$detail->url),
                     'tags'=>explode('|',$detail->tags),
                     'breadcrumb'=>[
