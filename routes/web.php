@@ -18,3 +18,10 @@ $router->get('/gettentang', 'ApiController@getTentang');
 $router->get('/', function () use ($router) {
     return redirect('https://desalase.id');
 });
+
+
+//================================================================
+//cms session
+//================================================================
+
+$router->post('/setbanner', 'ApiController@setBanner');

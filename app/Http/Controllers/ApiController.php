@@ -135,4 +135,11 @@ class ApiController extends Controller
         return response($data);
     }
 
+    //================================================================
+    //cms session
+    //================================================================
+    public function setBanner(){
+        
+    }
+
 }
