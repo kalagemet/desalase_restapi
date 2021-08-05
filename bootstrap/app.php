@@ -23,6 +23,10 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
+$app->bind('path.public', function() {
+    return realpath(__DIR__.'/api.desalase.id');
+});
+
 $app->withFacades();
 
 $app->withEloquent();
@@ -60,7 +64,7 @@ $app->singleton(
 */
 
 $app->configure('app');
-
+$app->configure('auth');
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
@@ -79,6 +83,10 @@ $app->configure('app');
 // $app->routeMiddleware([
 //     'auth' => App\Http\Middleware\Authenticate::class,
 // ]);
+$app->routeMiddleware([
+    'auth' => App\Http\Middleware\Authenticate::class,
+    'client' => \Laravel\Passport\Http\Middleware\CheckClientCredentials::class,
+]);
 
 /*
 |--------------------------------------------------------------------------
@@ -90,6 +98,9 @@ $app->configure('app');
 | totally optional, so you are not required to uncomment this line.
 |
 */
+
+$app->register(\Laravel\Passport\PassportServiceProvider::class);
+$app->register(\App\Providers\Passport\LumenPassportServiceProvider::class);
 
 $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);

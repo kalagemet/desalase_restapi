@@ -20,7 +20,6 @@ class CreateDetail extends Migration
             $table->string('img');
             $table->string('produsen',100);
             $table->double('harga');
-            $table->string('breadcumb',100);
             $table->string('url');
             $table->string('tags');
             $table->integer('id_kategori');
